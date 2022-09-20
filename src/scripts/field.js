@@ -4,18 +4,19 @@
 //Use the .push method on the seed function.
 //Object will pass through addPlant. Object will be added to plantField. Pass addPlant through usePlants.
 
-const plants = []
-export const addPlant = (seedObject) => {
-     if (Array.isArray(seedObject)) {
-        for (const seed of seedObject) {
-            plants.push(seedObject)
-        }
-        } else {
-            plants.push(seedObject)
-        }
-    return plants
+let plants = []
+export const addPlant = (seedObject) => { //This function is invoked in the plantSeeds function.
+    if (Array.isArray(seedObject)) { //This conditional checks to see if an array is an array. This is for the cornSeed which is an array of two objects.
+        for (let plant of seedObject) { //If the previous condition is met, this will loop through the corn array. 
+            plants.push(plant)          //Then add the objects in the corn array to the plants array.
+        }                               
+    } else {
+        plants.push(seedObject) //This applies to the rest of the seed objects.
+    } //A return statement was not necessary for this function. 
 }
 
+
+
 export const usePlants = () => {
-    return plants.map((seedObject) => ({...seedObject}))
+    return plants.map((seedObject) => ({ ...seedObject })) //This creates a copy of the plants arrary.
 }

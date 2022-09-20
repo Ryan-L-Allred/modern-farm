@@ -8,6 +8,8 @@ import { createWheat } from './seeds/wheat.js'
 import { addPlant } from './field.js'
 import { usePlants } from './field.js'
 import { plantSeeds } from './tractor.js'
+import { harvestPlants } from './harvester.js'
+import { catalog } from './catalog.js'
 
 //The addPlants function is already doing the work independently from the usePlants function.
 //By returning the plants array in the usePlants function it will display the work that addPlants is doing.
@@ -16,18 +18,17 @@ import { plantSeeds } from './tractor.js'
 // addPlant(asparagusSeed)
 // addPlant(cornSeed)
 // addPlant(potatoSeed)
-const yearlyPlan = createPlan()
-const asparagusSeed = createAsparagus()
-const cornSeed = createCorn()
-const potatoSeed = createPotato()
-const soybeanSeed = createSoybean()
-const sunflowerSeed = createSunflower()
-const wheatSeed = createWheat()
-const seedsPlanted = plantSeeds(yearlyPlan)
 
-const useThePlants = usePlants()
-console.log(yearlyPlan)
-console.log(seedsPlanted)
+
+const yearlyPlan = createPlan()
+plantSeeds(yearlyPlan)//Pass the plan array through plantSeeds for it to be iterated and then added to the plants array.
+const useThePlants = usePlants() //Pass that operation through usePlants in order to create a copy of the plants array.
+const plantsHarvested = harvestPlants(useThePlants)
+catalog(plantsHarvested)
+
+
+const parentHTML = document.querySelector(".container")
+parentHTML.innerHTML = catalog(plantsHarvested)
 
 
 
